@@ -4,6 +4,12 @@
 //--------------- includes ----------------
 # include <iostream>
 # include <string>
+// include pour unsleep
+# include <unistd.h>
+//include pour socket
+# include <sys/socket.h>
+// include pour exit et failure exit
+# include <stdlib.h>
 
 //--------------- colors ----------------
 # define RESET   "\033[0m"
