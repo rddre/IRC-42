@@ -7,6 +7,8 @@ Server::Server(std::string port, std::string password)
 
 Server::~Server()
 {
+    if (_serverFd != -1)
+        close(_serverFd);
 }
 
 void Server::run()
