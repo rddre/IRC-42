@@ -8,6 +8,14 @@
 # include <unistd.h>
 //include pour socket
 # include <sys/socket.h>
+# include <netinet/in.h>
+# include <arpa/inet.h>
+# include <fcntl.h>
+# include <poll.h>
+# include <vector>
+# include <cstring>
+# include <cerrno>
+# include <cstdio>
 // include pour exit et failure exit
 # include <stdlib.h>
 
