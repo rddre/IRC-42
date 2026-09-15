@@ -63,18 +63,10 @@ void Server::listenSocket()
 }
 
 // Cette fonction met un socket en mode non bloquant avec fcntl().
-// Cela est essentiel pour poll() et pour ne pas bloquer le serveur sur recv/send.
+// Cette forme est conforme au requirement de l'evaluation : fcntl(fd, F_SETFL, O_NONBLOCK).
 void Server::setNonBlocking(int fd)
 {
-    int flags = fcntl(fd, F_GETFL, 0);
-
-    if (flags == -1)
-    {
-        perror("fcntl");
-        close(fd);
-        exit(EXIT_FAILURE);
-    }
-    if (fcntl(fd, F_SETFL, flags | O_NONBLOCK) == -1)
+    if (fcntl(fd, F_SETFL, O_NONBLOCK) == -1)
     {
         perror("fcntl");
         close(fd);

@@ -67,14 +67,17 @@ void Server::processClientBuffer(int clientFd)
 // puis au CommandHandler pour l'executer.
 void Server::handleClientCommand(int clientFd, const std::string& line)
 {
+	std::map<int, Client>::iterator it;
 	Parser parser;
-	CommandHandler commandHandler;
-	std::vector<std::string> tokens;
+	CommandHandler commandHandler(this);
+	Parser::Command parsedCommand;
 
-	(void)clientFd;
-	tokens = parser.parse(line);
-	if (tokens.empty())
+	it = _clients.find(clientFd);
+	if (it == _clients.end())
 		return ;
-	std::cout << "Command received: " << line << std::endl;
-	commandHandler.execute(line);
+	parsedCommand = parser.parseMessage(line);
+	if (parsedCommand.name.empty())
+		return ;
+	std::cout << "Command received from fd " << clientFd << ": " << line << std::endl;
+	commandHandler.executeCommand(&it->second, parsedCommand);
 }

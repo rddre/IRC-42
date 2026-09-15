@@ -12,11 +12,6 @@ SRCS		:= \
 	$(SRC_DIR)/channel/Channel.cpp \
 	$(SRC_DIR)/client/Client.cpp \
 	$(SRC_DIR)/commands/CommandHandler.cpp \
-	$(SRC_DIR)/commands/JOIN.cpp \
-	$(SRC_DIR)/commands/KICK.cpp \
-	$(SRC_DIR)/commands/NICK.cpp \
-	$(SRC_DIR)/commands/PASS.cpp \
-	$(SRC_DIR)/commands/USER.cpp \
 	$(SRC_DIR)/parser/Parser.cpp \
 	$(SRC_DIR)/replies/Replies.cpp \
 	$(SRC_DIR)/server/Accept.cpp \

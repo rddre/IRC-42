@@ -12,12 +12,50 @@ Server::Server(std::string port, std::string password)
 // les fuites de descripteurs et laisser le système proprement dans un etat net.
 Server::~Server()
 {
+	std::map<std::string, Channel*>::iterator it;
+
+	for (it = _channels.begin(); it != _channels.end(); ++it)
+		delete it->second;
+	_channels.clear();
 	closeAllClientFds();
     if (_serverFd != -1)
     {
         close(_serverFd);
         _serverFd = -1;
     }
+}
+
+const std::string& Server::getPassword() const
+{
+	return (_password);
+}
+
+std::map<int, Client>& Server::getClients()
+{
+	return (_clients);
+}
+
+std::map<std::string, Channel*>& Server::getChannels()
+{
+	return (_channels);
+}
+
+Channel* Server::getChannel(const std::string& name) const
+{
+	std::map<std::string, Channel*>::const_iterator it = _channels.find(name);
+	if (it == _channels.end())
+		return (NULL);
+	return (it->second);
+}
+
+Channel* Server::createChannel(const std::string& name)
+{
+	Channel* channel = getChannel(name);
+	if (channel != NULL)
+		return (channel);
+	channel = new Channel(name);
+	_channels.insert(std::make_pair(name, channel));
+	return (channel);
 }
 
 // Cette fonction lance le cycle principal du serveur.

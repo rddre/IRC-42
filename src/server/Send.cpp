@@ -6,6 +6,8 @@
 // toute la communication sortante.
 void Server::sendToClient(int clientFd, const std::string& message)
 {
+	// Debug: log outgoing message and target fd
+	std::cout << "[sendToClient] fd=" << clientFd << " msg=" << message << std::endl;
 	size_t totalSent;
 	size_t messageSize;
 	ssize_t bytesSent;

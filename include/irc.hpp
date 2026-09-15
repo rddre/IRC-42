@@ -16,6 +16,7 @@
 # include <cstring>
 # include <cerrno>
 # include <cstdio>
+# include <cstdlib>
 // include pour exit et failure exit
 # include <stdlib.h>
 
